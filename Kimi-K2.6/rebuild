@@ -1,0 +1,10 @@
+Phase 3 COMPLETE - Rebuild plan executed.
+
+Architecture decisions:
+- Next.js 16 App Router monolith
+- BetterAuth for session-based authentication
+- Drizzle ORM + better-sqlite3 for local SQLite
+- @carbon/styles/css/styles.css for themeable CSS (avoiding SCSS font resolution issues)
+- React Query for server state, Zustand not needed
+- dnd-kit for drag-and-drop with optimistic updates
+- All API routes use explicit Zod validation and consistent JSON responses

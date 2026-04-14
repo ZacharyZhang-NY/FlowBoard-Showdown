@@ -1,0 +1,16 @@
+**/node_modules
+**/.next
+.git
+**/*.sqlite
+**/*.sqlite-shm
+**/*.sqlite-wal
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/data/storage
+**/data/backups
+**/data/logs
+**/test-results
+**/tmp-*
+**/.DS_Store
+**/playwright-report

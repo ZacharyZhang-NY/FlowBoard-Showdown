@@ -1,0 +1,52 @@
+{
+  "name": "flowboard",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run db:prepare && next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:prepare": "npm run db:migrate && npm run db:seed",
+    "db:seed": "tsx db/seed.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@better-auth/expo": "latest",
+    "@carbon/charts-react": "latest",
+    "@carbon/icons-react": "latest",
+    "@carbon/react": "latest",
+    "@carbon/styles": "latest",
+    "@dnd-kit/core": "latest",
+    "@dnd-kit/sortable": "latest",
+    "@dnd-kit/utilities": "latest",
+    "@tanstack/react-query": "^5.99.0",
+    "better-auth": "latest",
+    "better-sqlite3": "latest",
+    "date-fns": "latest",
+    "drizzle-orm": "latest",
+    "drizzle-zod": "latest",
+    "next": "16.2.3",
+    "next-swagger-doc": "latest",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "swagger-ui-react": "latest",
+    "zod": "latest",
+    "zustand": "latest"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "latest",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/swagger-ui-react": "latest",
+    "drizzle-kit": "^0.31.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.3",
+    "sass": "latest",
+    "tsx": "latest",
+    "typescript": "^5"
+  }
+}

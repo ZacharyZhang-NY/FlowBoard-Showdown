@@ -1,0 +1,379 @@
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/theme' with (
+  $theme: themes.$g10
+);
+@use '@carbon/react';
+@use '@carbon/grid';
+
+:root {
+  --header-height: 48px;
+  --sidenav-width: 256px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+// Dark theme override
+[data-carbon-theme='g90'] {
+  @include theme.theme(themes.$g90);
+}
+
+// App shell layout
+.app-shell {
+  display: flex;
+  min-height: calc(100vh - var(--header-height));
+  padding-top: var(--header-height);
+}
+
+.app-content {
+  flex: 1;
+  margin-left: var(--sidenav-width);
+  padding: 2rem;
+  min-height: calc(100vh - var(--header-height));
+  transition: margin-left 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+
+  @media (max-width: 1055px) {
+    margin-left: 0;
+  }
+}
+
+// Login page
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--cds-layer);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: var(--cds-field);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-title {
+  @include react.type-style('productive-heading-05');
+  margin-bottom: 0.5rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// Board view
+.board-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  min-height: calc(100vh - var(--header-height) - 8rem);
+}
+
+.board-column {
+  flex: 0 0 280px;
+  min-width: 280px;
+  background: var(--cds-layer);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--header-height) - 10rem);
+}
+
+.board-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--cds-border-subtle);
+
+  h4 {
+    @include react.type-style('productive-heading-02');
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.board-column-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.issue-card {
+  padding: 0.75rem;
+  background: var(--cds-field);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 4px;
+  cursor: grab;
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  &.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+  }
+}
+
+.issue-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.issue-card-key {
+  @include react.type-style('code-01');
+  color: var(--cds-text-secondary);
+}
+
+.issue-card-title {
+  @include react.type-style('body-compact-01');
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.issue-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.issue-card-tags {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+// Page headers
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-title {
+  @include react.type-style('productive-heading-05');
+}
+
+.section-title {
+  @include react.type-style('productive-heading-03');
+  margin-bottom: 1rem;
+}
+
+// Dashboard
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 1055px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 671px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  padding: 1.25rem;
+
+  .stat-value {
+    @include react.type-style('productive-heading-05');
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    @include react.type-style('label-01');
+    color: var(--cds-text-secondary);
+  }
+}
+
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+
+  @media (max-width: 1055px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Reports
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 1055px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.report-tile {
+  padding: 1.25rem;
+  min-height: 300px;
+
+  h4 {
+    @include react.type-style('productive-heading-02');
+    margin-bottom: 1rem;
+  }
+}
+
+// Issue detail
+.issue-detail {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+
+  @media (max-width: 1055px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.issue-detail-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.issue-detail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  .field-label {
+    @include react.type-style('label-01');
+    color: var(--cds-text-secondary);
+  }
+}
+
+// Avatar
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--cds-interactive);
+  color: var(--cds-text-on-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+
+  &.small {
+    width: 24px;
+    height: 24px;
+    font-size: 0.625rem;
+  }
+}
+
+// Inline create
+.inline-create {
+  padding: 0.5rem;
+}
+
+// Sprint view
+.sprint-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sprint-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  @include react.type-style('body-compact-01');
+  color: var(--cds-text-secondary);
+}
+
+// Settings
+.settings-container {
+  max-width: 800px;
+}
+
+// Empty state
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  gap: 1rem;
+
+  .empty-state-icon {
+    color: var(--cds-icon-secondary);
+  }
+
+  h4 {
+    @include react.type-style('productive-heading-02');
+  }
+
+  p {
+    @include react.type-style('body-long-01');
+    color: var(--cds-text-secondary);
+  }
+}
+
+// Utility
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-4 { margin-top: 2rem; }

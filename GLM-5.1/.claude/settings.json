@@ -1,0 +1,110 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "bed4728ab11b434d8a361f07a25899bd.jQnBk1mzZjyaZjuz",
+    "ANTHROPIC_MODEL": "glm-5.1",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-5.1",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-5.1",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-5.1",
+    "ENABLE_TOOL_SEARCH": "true",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "ANTHROPIC_REASONING_MODEL": "glm-5.1",
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
+    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/zacharyzhang/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash C:/Users/zacharyzhang/.claude/hooks/gsd-session-state.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/zacharyzhang/.claude/hooks/gsd-context-monitor.js\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash C:/Users/zacharyzhang/.claude/hooks/gsd-phase-boundary.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/zacharyzhang/.claude/hooks/gsd-prompt-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/zacharyzhang/.claude/hooks/gsd-read-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/zacharyzhang/.claude/hooks/gsd-workflow-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash C:/Users/zacharyzhang/.claude/hooks/gsd-validate-commit.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node \"C:/Users/zacharyzhang/.claude/hooks/gsd-statusline.js\""
+  },
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high"
+}

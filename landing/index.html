@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowBoard - AI Model Showdown</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;background:#fff;color:#111;
+    font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;
+    display:flex;flex-direction:column;align-items:center;
+    padding:4rem 2rem 2rem;
+  }
+  .hero{text-align:center;margin-bottom:3.5rem}
+  .hero h1{font-size:2.4rem;font-weight:700;color:#111;letter-spacing:-.03em;margin-bottom:.6rem}
+  .hero p{color:#666;font-size:1.05rem;max-width:440px;margin:0 auto;line-height:1.5}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.25rem;width:100%;max-width:1060px;
+  }
+  .card{
+    border:1px solid #e5e5e5;border-radius:12px;padding:1.75rem;
+    transition:border-color .2s,box-shadow .2s;cursor:pointer;
+    text-decoration:none;color:inherit;
+    display:flex;flex-direction:column;background:#fff;
+  }
+  .card:hover{
+    border-color:var(--accent);
+    box-shadow:0 1px 3px rgba(0,0,0,.06),0 0 0 1px var(--accent);
+  }
+  .icon{
+    width:36px;height:36px;border-radius:8px;
+    background:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:1.25rem;
+    font-size:.8rem;font-weight:700;color:#fff;letter-spacing:.02em;
+  }
+  .card h2{font-size:1.15rem;font-weight:650;margin-bottom:.25rem;letter-spacing:-.01em}
+  .card .company{color:#999;font-size:.8rem;margin-bottom:.85rem}
+  .card .company{margin-bottom:0}
+  .card .spacer{flex:1}
+  .card .launch{
+    margin-top:1.25rem;padding:.55rem 0;
+    border:1px solid #e5e5e5;border-radius:8px;
+    background:#fafafa;color:#333;
+    font-size:.82rem;font-weight:550;
+    transition:all .2s;text-align:center;
+  }
+  .card:hover .launch{
+    background:var(--accent);color:#fff;border-color:var(--accent);
+  }
+  .footer{margin-top:3.5rem;color:#bbb;font-size:.78rem}
+
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){
+    .hero h1{font-size:1.7rem}
+    .grid{grid-template-columns:1fr;max-width:360px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>FlowBoard Showdown</h1>
+  <p>Same PRD, four AI models. Explore each implementation side by side.</p>
+</div>
+
+<div class="grid">
+  <a class="card" style="--accent:#059669" data-port="3001">
+    <div class="icon">G</div>
+    <h2>GLM 5.1</h2>
+    <div class="company">Zhipu AI</div>
+    <div class="spacer"></div>
+    <div class="launch">Launch</div>
+  </a>
+
+  <a class="card" style="--accent:#2563eb" data-port="3002">
+    <div class="icon">K</div>
+    <h2>Kimi K2.6</h2>
+    <div class="company">Moonshot AI</div>
+    <div class="spacer"></div>
+    <div class="launch">Launch</div>
+  </a>
+
+  <a class="card" style="--accent:#d97706" data-port="3003">
+    <div class="icon">C</div>
+    <h2>Opus 4.6</h2>
+    <div class="company">Anthropic</div>
+    <div class="spacer"></div>
+    <div class="launch">Launch</div>
+  </a>
+
+  <a class="card" style="--accent:#7c3aed" data-port="3004">
+    <div class="icon">X</div>
+    <h2>GPT 5.4</h2>
+    <div class="company">OpenAI</div>
+    <div class="spacer"></div>
+    <div class="launch">Launch</div>
+  </a>
+</div>
+
+<div class="footer">Zachary Zhang</div>
+
+<script>
+  document.querySelectorAll('.card').forEach(card => {
+    const port = card.dataset.port;
+    const host = location.hostname || 'localhost';
+    card.href = location.protocol + '//' + host + ':' + port;
+    card.target = '_blank';
+  });
+</script>
+
+</body>
+</html>

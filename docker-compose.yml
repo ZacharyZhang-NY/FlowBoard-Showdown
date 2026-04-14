@@ -1,0 +1,61 @@
+services:
+  landing:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./landing/index.html:/usr/share/nginx/html/index.html:ro
+      - ./landing/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+
+  glm:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+      args:
+        APP_DIR: GLM-5.1
+    ports:
+      - "3001:3000"
+    environment:
+      - DATABASE_URL=./data/flowboard.db
+    restart: unless-stopped
+
+  kimi:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+      args:
+        APP_DIR: Kimi-K2.6
+    ports:
+      - "3002:3000"
+    environment:
+      - DATABASE_URL=./flowboard.db
+    restart: unless-stopped
+
+  opus:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+      args:
+        APP_DIR: Opus4.6-MaxThinking
+    ports:
+      - "3003:3000"
+    environment:
+      - DATABASE_URL=./db/flowboard.db
+    restart: unless-stopped
+
+  gpt:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+      args:
+        APP_DIR: GPT5.4-XHigh
+    ports:
+      - "3004:3000"
+    environment:
+      - DATABASE_URL=./flowboard.sqlite
+      - BETTER_AUTH_SECRET=docker-flowboard-secret-key-change-in-prod
+      - BETTER_AUTH_URL=http://localhost:3004
+      - APP_URL=http://localhost:3004
+      - NEXT_PUBLIC_APP_URL=http://localhost:3004
+    restart: unless-stopped
